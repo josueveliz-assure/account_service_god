@@ -18,11 +18,12 @@ class UserPGRepository implements UserRepository
         $query = "INSERT INTO public.user (name, last_name, email, password, role_id) VALUES (:name, :last_name, :email, :password, :role_id)";
         $stmt = $this->db->prepare($query);
         print_r($user);
-        $stmt->bindParam(':name', $user['name']);
-        $stmt->bindParam(':last_name', $user['last_name']);
-        $stmt->bindParam(':email', $user['email']);
-        $stmt->bindParam(':password', $user['password']);
-        $stmt->bindParam(':role_id', $user['role_id']);
+        $stmt->bindParam(':name', $user->getName());
+        $stmt->bindParam(':last_name', $user->getLastName());
+        $stmt->bindParam(':email', $user->getEmail());
+        $stmt->bindParam(':password', $user->getPassword());
+        $stmt->bindParam(':role_id', $user->getRoleId());
+
         if (!$stmt->execute()) {
             throw new \Exception($stmt->errorInfo()[2]);
         }
