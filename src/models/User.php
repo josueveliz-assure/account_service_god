@@ -9,14 +9,16 @@ class User
     private string $lastName;
     private string $email;
     private string $password;
+    private int $roleId;
 
-    public function __construct(int $id,string $name, string $lastName, string $email, string $password)
+    public function __construct(int $id,string $name, string $lastName, string $email, string $password, int $roleId)
     {
         $this->id = $id;
         $this->name = $name;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $this->hashPassword($password);
+        $this->roleId = $roleId;
     }
 
     private function hashPassword(string $password): string
@@ -54,6 +56,11 @@ class User
         return $this->password;
     }
 
+    public function getRoleId(): int
+    {
+        return $this->roleId;
+    }
+
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -72,6 +79,11 @@ class User
     public function setPassword(string $password): void
     {
         $this->password = $this->hashPassword($password);
+    }
+
+    public function setRoleId(int $roleId): void
+    {
+        $this->roleId = $roleId;
     }
 
     public static function verifyPassword(string $passwordHash, string $password): bool
