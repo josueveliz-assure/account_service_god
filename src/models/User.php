@@ -99,6 +99,7 @@ class User
             'lastName' => $this->lastName,
             'email' => $this->email,
             'password' => $this->password,
+            'roleId' => $this->roleId
         ];
     }
 }
