@@ -1,5 +1,5 @@
 # ACCOUNT SERVICE API
-This project is a API for managing accounts
+This project is an API for managing accounts
 
 ## Prerequisites
 Before running the application you need the following prerequisites:
@@ -25,11 +25,11 @@ Create User
 }
 ```
 email is unique
-password will be hash
+password will be hashed
 roleId references role table, and have to existis rol with id:1 (1), id:2 (trainee), id:3 (trainer)
 
-## Set env
-Your env need the following parameters:
+## Set .env
+Your .env needs the following variables:
 
 ```
 JWT_KEY=<key>
@@ -40,10 +40,10 @@ DB_CONNECTION='pgsql:host=<host>;dbname=<db_name>'
 DB_USERNAME='<db_username>'
 DB_PASSWORD='<db_password>'
 ```
-you can use HS256 <algorithm>
+you can use the HS256 algorithm
 
 ## Run Docker Compose
-If you want run docker compose you need aply changes in your env
+If you want to run docker compose you need to apply this changes in your .env
 ```
 JWT_KEY=<key>
 JWT_ALGORTHM=<algorithm>
