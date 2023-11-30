@@ -6,9 +6,6 @@ use App\factories\UserControllerFactory;
 use Dotenv\Dotenv;
 
 require_once 'vendor/autoload.php';
-require_once 'src/repositories/UserRespository.php';
-require_once 'src/factories/UserControllerFactory.php';
-require_once 'src/repositories/UserPGRespository.php';
 
 
 $dotenv = Dotenv::createImmutable(__DIR__);
