@@ -42,6 +42,13 @@ DB_PASSWORD='<db_password>'
 ```
 you can use the HS256 algorithm
 
+## Run Project
+You can run project with:
+php -S localhost:[port]
+
+Make sure of run comand:
+composer dump-autoload
+
 ## Run Docker Compose
 If you want to run docker compose you need to apply this changes in your .env
 ```
