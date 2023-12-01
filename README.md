@@ -14,7 +14,7 @@ Before running the application you need the following prerequisites:
 Create User
 * Endpoint: POST /users
 * Description: Create a new user
-* Request Body: JSOM representation of the user to be created.
+* Request Body: JSON representation of the user to be created.
 ```Json
 {
     "name": "New Name",
@@ -41,6 +41,13 @@ DB_USERNAME='<db_username>'
 DB_PASSWORD='<db_password>'
 ```
 you can use the HS256 algorithm
+
+## Run Project
+You can run project with:
+php -S localhost:[port]
+
+Make sure of run comand:
+composer dump-autoload
 
 ## Run Docker Compose
 If you want to run docker compose you need to apply this changes in your .env
