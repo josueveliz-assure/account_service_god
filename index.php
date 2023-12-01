@@ -6,9 +6,6 @@ use App\factories\UserControllerFactory;
 use Dotenv\Dotenv;
 
 require_once 'vendor/autoload.php';
-require_once 'src/repositories/UserRespository.php';
-require_once 'src/factories/UserControllerFactory.php';
-require_once 'src/repositories/UserPGRespository.php';
 
 
 $dotenv = Dotenv::createImmutable(__DIR__);
@@ -21,10 +18,29 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: *");
 
 $userControllerFactory = new UserControllerFactory();
+$userController= $userControllerFactory->createPGController();
 
-Flight::route("POST /users", function () use ($userControllerFactory) {
-    $userController = $userControllerFactory->createPGController();
+Flight::route("POST /users", function () use ($userController) {
     $userController->create();
+});
+
+Flight::route("GET /users/@id", function ($id) use ($userController) {
+    $id = (int) $id;
+    $userController->getById($id);
+});
+
+Flight::route("GET /users", function () use ($userController) {
+    $userController->getAll();
+});
+
+Flight::route("PUT /users/@id", function ($id) use ($userController) {
+    $id = (int) $id;
+    $userController->update($id);
+});
+
+Flight::route("DELETE /users/@id", function ($id) use ($userController) {
+    $id = (int) $id;
+    $userController->delete($id);
 });
 
 Flight::start();
