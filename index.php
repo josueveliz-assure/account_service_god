@@ -24,4 +24,23 @@ Flight::route("POST /users", function () use ($userController) {
     $userController->create();
 });
 
+Flight::route("GET /users/@id", function ($id) use ($userController) {
+    $id = (int) $id;
+    $userController->getById($id);
+});
+
+Flight::route("GET /users", function () use ($userController) {
+    $userController->getAll();
+});
+
+Flight::route("PUT /users/@id", function ($id) use ($userController) {
+    $id = (int) $id;
+    $userController->update($id);
+});
+
+Flight::route("DELETE /users/@id", function ($id) use ($userController) {
+    $id = (int) $id;
+    $userController->delete($id);
+});
+
 Flight::start();

@@ -8,26 +8,14 @@ class User
     private string $name;
     private string $lastName;
     private string $email;
-    private string $password;
+    private ?string $password;
     private ?int $roleId;
 
-    public function __construct(?int $id = null, ?string $name = null, ?string $lastName = null, ?string $email = null, ?string $password = null, ?int $roleId = null)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->lastName = $lastName;
-        $this->email = $email;
-        $this->password = $this->hashPassword($password);
-        $this->roleId = $roleId;
-    }
+    public function __construct() { }
 
     private function hashPassword(string $password): string
     {
-        $options = [
-            'cost' => 12,
-        ];
-
-        $hashedPassword = password_hash($password, PASSWORD_ARGON2ID, $options);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         return $hashedPassword;
     }
 
@@ -51,7 +39,7 @@ class User
         return $this->email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -59,6 +47,11 @@ class User
     public function getRoleId(): ?int
     {
         return $this->roleId;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function setName(string $name): void
@@ -84,6 +77,19 @@ class User
     public function setRoleId(int $roleId): void
     {
         $this->roleId = $roleId;
+    }
+
+    public function hydrate(array $data): void
+    {
+        $this->id = $data['id'] ?? null;
+        $this->name = $data['name'];
+        $this->lastName = $data['lastName'] ?? $data['last_name'];
+        $this->email = $data['email'];
+        if($data['password'] ?? false)
+            $this->password = $this->hashPassword($data['password']);
+        else
+            $this->password = null;
+        $this->roleId = $data['roleId'] ?? $data['role_id'] ?? null;
     }
 
     public static function verifyPassword(string $passwordHash, string $password): bool
